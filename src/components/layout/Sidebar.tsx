@@ -6,12 +6,15 @@ import {
   LogOutIcon,
   X,
 } from 'lucide-react';
-import { NavLink } from 'react-router';
+import { NavLink, useLocation } from 'react-router';
 
 function Sidebar(props: {
   menuStatus: boolean;
   setMenuStatus: (status: boolean) => void;
 }) {
+
+  const location = useLocation();
+
   return props.menuStatus ? (
     <aside className="fixed top-0 right-0 w-64 bg-gray-800 text-white h-screen p-4 pl-2 border-l border-gray-700 z-50 lg:hidden">
       <div className="flex justify-end m-2">
@@ -21,7 +24,7 @@ function Sidebar(props: {
         />
       </div>
       <ul className="space-y-4">
-        <li className="hover:bg-gray-700 p-1 rounded-sm">
+        <li className={location.pathname === "/product" ? "bg-gray-700 p-1 rounded-sm" : "hover:bg-gray-700 p-1 rounded-sm"}>
           <NavLink
             to="/product"
             className="block text-md text-gray-100 active:font-bold "
@@ -34,7 +37,7 @@ function Sidebar(props: {
             </div>
           </NavLink>
         </li>
-        <li className="hover:bg-gray-700 p-1 rounded-sm">
+        <li className={location.pathname === "/feature" ? "bg-gray-700 p-1 rounded-sm" : "hover:bg-gray-700 p-1 rounded-sm"}>
           <NavLink
             to="/feature"
             className="block text-md text-gray-100 active:font-bold "
@@ -47,7 +50,7 @@ function Sidebar(props: {
             </div>
           </NavLink>
         </li>
-        <li className="hover:bg-gray-700 p-1 rounded-sm">
+        <li className={location.pathname === "/about" ? "bg-gray-700 p-1 rounded-sm" : "hover:bg-gray-700 p-1 rounded-sm"}>
           <NavLink
             to="/about"
             className="block text-md text-gray-100 active:font-bold "
@@ -60,7 +63,7 @@ function Sidebar(props: {
             </div>
           </NavLink>
         </li>
-        <li className="hover:bg-gray-700 p-1 rounded-sm">
+        <li className={location.pathname === "/contact" ? "bg-gray-700 p-1 rounded-sm" : "hover:bg-gray-700 p-1 rounded-sm"}>
           <NavLink
             to="/contact"
             className="block text-md text-gray-100 active:font-bold "
