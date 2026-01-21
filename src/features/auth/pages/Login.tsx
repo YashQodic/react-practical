@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { signUpSchema, type TSingUpSchema } from '../schemas/login.schema';
 import { NavLink, useNavigate } from 'react-router';
+import { Loader } from 'lucide-react';
 
 function Login() {
   const {
@@ -88,7 +89,7 @@ function Login() {
             className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
             type="submit"
           >
-            Login
+             {isSubmitting ? <Loader className="h-4 w-4 animate-spin" /> : 'Sign in'}
           </button>
         </form>
         <p className="mt-10 text-center text-sm/6 text-gray-400">

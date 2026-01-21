@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router';
 import logo from '../../../public/vite.svg';
-import { Menu } from "lucide-react"
+import { LogOutIcon, Menu } from "lucide-react"
 
 function Header(props: {menuStatus: boolean, setMenuStatus: (status: boolean) => void}) {
 
@@ -47,11 +47,8 @@ function Header(props: {menuStatus: boolean, setMenuStatus: (status: boolean) =>
             ) : null}
           </div>
           <div className="hidden lg:flex flex-1 justify-end items-end">
-            <NavLink
-              to="/"
-              className="block text-md text-gray-100 hover:text-stone-400"
-            >
-              Log out
+            <NavLink to="/" className="flex items-center hover:text-stone-400">
+              <LogOutIcon className="h-5 w-5 inline mr-1 hover:text-inherit"/>
             </NavLink>
           </div>
         </nav>

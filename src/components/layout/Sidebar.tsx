@@ -22,10 +22,13 @@ function Sidebar(props: {
       </div>
       <ul className="space-y-4">
         <li className="hover:bg-gray-700 p-1 rounded-sm">
-          <NavLink to="/product">
+          <NavLink
+            to="/product"
+            className="block text-md text-gray-100 active:font-bold "
+          >
             <div className="flex items-center">
-              <BoxIcon className="h-5 w-5 inline mr-2" />{' '}
-              <p className="text-md text-gray-100 active:font-bold hover:text-stone-400">
+              <BoxIcon className="h-5 w-5 inline mr-2" />
+              <p className="text-md text-gray-100 active:font-bold ">
                 Product
               </p>
             </div>
@@ -34,11 +37,11 @@ function Sidebar(props: {
         <li className="hover:bg-gray-700 p-1 rounded-sm">
           <NavLink
             to="/feature"
-            className="block text-md text-gray-100 active:font-bold hover:text-stone-400"
+            className="block text-md text-gray-100 active:font-bold "
           >
             <div className="flex items-center">
-              <FeatherIcon className="h-5 w-5 inline mr-2" />{' '}
-              <p className="text-md text-gray-100 active:font-bold hover:text-stone-400">
+              <FeatherIcon className="h-5 w-5 inline mr-2" />
+              <p className="text-md text-gray-100 active:font-bold ">
                 Feature
               </p>
             </div>
@@ -47,11 +50,11 @@ function Sidebar(props: {
         <li className="hover:bg-gray-700 p-1 rounded-sm">
           <NavLink
             to="/about"
-            className="block text-md text-gray-100 active:font-bold hover:text-stone-400"
+            className="block text-md text-gray-100 active:font-bold "
           >
             <div className="flex items-center">
               <InfoIcon className="h-5 w-5 inline mr-2" />{' '}
-              <p className="text-md text-gray-100 active:font-bold hover:text-stone-400">
+              <p className="text-md text-gray-100 active:font-bold ">
                 About
               </p>
             </div>
@@ -60,11 +63,11 @@ function Sidebar(props: {
         <li className="hover:bg-gray-700 p-1 rounded-sm">
           <NavLink
             to="/contact"
-            className="block text-md text-gray-100 active:font-bold hover:text-stone-400"
+            className="block text-md text-gray-100 active:font-bold "
           >
             <div className="flex items-center">
               <ContactIcon className="h-5 w-5 inline mr-2" />{' '}
-              <p className="text-md text-gray-100 active:font-bold hover:text-stone-400">
+              <p className="text-md text-gray-100 active:font-bold ">
                 Contact
               </p>
             </div>
@@ -74,11 +77,11 @@ function Sidebar(props: {
         <li className="hover:bg-gray-700 p-1 rounded-sm">
           <NavLink
             to="/contact"
-            className="block text-md text-gray-100 active:font-bold hover:text-stone-400"
+            className="block text-md text-gray-100 active:font-bold "
           >
             <div className="flex items-center">
               <LogOutIcon className="h-5 w-5 inline mr-2" />{' '}
-              <p className="text-md text-gray-100 active:font-bold hover:text-stone-400">
+              <p className="text-md text-gray-100 active:font-bold ">
                 Log out
               </p>
             </div>
