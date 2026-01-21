@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { signUpSchema, type TSingUpSchema } from '../schemas/login.schema';
+import { NavLink } from 'react-router';
 
 function Login() {
   const {
@@ -90,12 +91,12 @@ function Login() {
         </form>
         <p className="mt-10 text-center text-sm/6 text-gray-400">
           Don't have an account?
-          <a
-            href="#"
+          <NavLink
+            to="/register"
             className="ml-1 font-semibold text-indigo-400 hover:text-indigo-300"
           >
             Sign up now
-          </a>
+          </NavLink>
         </p>
       </div>
     </div>
