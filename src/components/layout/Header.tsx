@@ -1,14 +1,12 @@
 import { NavLink } from 'react-router';
 import logo from '../../../public/vite.svg';
-import { Menu, X } from "lucide-react"
-import { useState } from 'react';
+import { Menu } from "lucide-react"
 
-function Header(){
+function Header(props: {menuStatus: boolean, setMenuStatus: (status: boolean) => void}) {
 
-    const [menuStatus, setMenuStatus] = useState<boolean>(true);
 
     return (
-      <header className="p-4 bg-gray-800 text-white">
+      <header className="fixed top-0 w-full z-10 p-4 bg-gray-800 text-white">
         <nav className="flex gap-4 items-center">
           <div>
             <img
@@ -44,8 +42,8 @@ function Header(){
             </NavLink>
           </div>
           <div className="flex lg:hidden flex-1 justify-end items-end">
-            {menuStatus ? (
-              <Menu className="h-6 w-6" onClick={() => setMenuStatus(false)} />
+            {!props.menuStatus ? (
+              <Menu className="h-6 w-6" onClick={() => props.setMenuStatus(true)} />
             ) : null}
           </div>
           <div className="hidden lg:flex flex-1 justify-end items-end">
