@@ -7,7 +7,7 @@ function Header(props: {
   setMenuStatus: (status: boolean) => void;
 }) {
   return (
-    <header className="fixed top-0 w-full z-10 p-4 bg-gray-800 text-white">
+    <header className="p-4 bg-gray-800 text-white">
       <nav className="flex gap-4 items-center">
         <div>
           <img
