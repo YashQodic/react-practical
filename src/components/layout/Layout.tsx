@@ -1,10 +1,16 @@
 import { Outlet } from 'react-router';
 import Header from './Header';
+import Sidebar from './Sidebar';
+import { useState } from 'react';
 
 function Layout() {
+  
+  const [menuStatus, setMenuStatus] = useState<boolean>(false);
+
   return (
     <>
-      <Header />
+      <Header menuStatus={menuStatus} setMenuStatus={setMenuStatus} />
+      <Sidebar menuStatus={menuStatus} setMenuStatus={setMenuStatus} />
       <Outlet />
     </>
   );
