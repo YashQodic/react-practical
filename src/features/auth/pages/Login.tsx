@@ -19,6 +19,7 @@ function Login() {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     console.log('Data', data);
     reset();
+    localStorage.setItem('userLogin', JSON.stringify(true));
     navigate('/product');
   };
 

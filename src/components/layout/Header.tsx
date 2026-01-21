@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router';
+import { NavLink, useNavigate } from 'react-router';
 import logo from '../../../public/vite.svg';
 import { LogOutIcon, Menu } from 'lucide-react';
 
@@ -6,6 +6,11 @@ function Header(props: {
   menuStatus: boolean;
   setMenuStatus: (status: boolean) => void;
 }) {
+  const navigate = useNavigate();
+  const logOut = () => {
+    localStorage.removeItem('userLogin');
+    navigate('/');
+  };
   return (
     <header className="p-4 bg-gray-800 text-white">
       <nav className="flex gap-4 items-center">
@@ -68,7 +73,10 @@ function Header(props: {
         </div>
         <div className="hidden lg:flex flex-1 justify-end items-end">
           <NavLink to="/" className="flex items-center hover:text-stone-400">
-            <LogOutIcon className="h-5 w-5 inline mr-1 hover:text-inherit" />
+            <LogOutIcon
+              className="h-5 w-5 inline mr-1 hover:text-inherit"
+              onClick={logOut}
+            />
           </NavLink>
         </div>
       </nav>
