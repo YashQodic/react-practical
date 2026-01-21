@@ -47,7 +47,7 @@ function Login() {
               type="text"
               id="username"
               className="bg-blue-200 p-2 border border-default-medium text-heading text-sm rounded-md focus:outline-none border-black"
-              placeholder="Email address"
+              placeholder="Username"
               {...register('username')}
             ></input>
             {errors.username && (
