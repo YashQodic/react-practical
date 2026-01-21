@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { signUpSchema, type TSingUpSchema } from '../schemas/login.schema';
-import { NavLink } from 'react-router';
+import { NavLink, useNavigate } from 'react-router';
 
 function Login() {
   const {
@@ -12,11 +12,13 @@ function Login() {
   } = useForm<TSingUpSchema>({
     resolver: zodResolver(signUpSchema),
   });
+  const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<TSingUpSchema> = async (data) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     console.log('Data', data);
     reset();
+    navigate('/product');
   };
 
   return (
