@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { NavLink } from "react-router";
 import { forgotPasswordSchema, type TForgotPasswordSchema } from "../schemas/forgotpassword.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { routesPath } from "../../../utils/constants";
 
 function ForgotPassword() {
     const {
@@ -65,7 +66,7 @@ function ForgotPassword() {
         <p className="mt-10 text-center text-sm/6 text-gray-400">
           Don't have an account?
           <NavLink
-            to="/register"
+            to={routesPath.register}
             className="ml-1 font-semibold text-indigo-400 hover:text-indigo-300"
           >
             Sign up now
