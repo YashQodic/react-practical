@@ -49,7 +49,7 @@ function Header(props: {menuStatus: boolean, setMenuStatus: (status: boolean) =>
           <div className="hidden lg:flex flex-1 justify-end items-end">
             <NavLink
               to="/"
-              className="block text-md text-gray-100 active:font-bold hover:text-stone-400"
+              className="block text-md text-gray-100 hover:text-stone-400"
             >
               Log out
             </NavLink>
