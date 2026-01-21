@@ -52,6 +52,26 @@ function Register() {
                 </span>
               )}
             </div>
+             <div className="flex flex-col gap-1">
+              <label
+                htmlFor="email"
+                className="block text-sm/6 font-medium text-gray-100"
+              >
+                Email:
+              </label>
+              <input
+                type="text"
+                id="email"
+                className="bg-blue-200 p-2 border border-default-medium text-heading text-sm rounded-md focus:outline-none border-black"
+                placeholder="Email address"
+                {...register('email')}
+              ></input>
+              {errors.email && (
+                <span className="text-red-400 text-sm">
+                  {errors.email.message}
+                </span>
+              )}
+            </div>
             <div className="flex flex-col gap-1">
               <label
                 htmlFor="password"
