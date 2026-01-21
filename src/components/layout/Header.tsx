@@ -69,7 +69,7 @@ function Header(props: {
           ) : null}
         </div>
         <div className="hidden lg:flex flex-1 justify-end items-end">
-          <NavLink to={routesPath.login} className="flex items-center hover:text-stone-400">
+          <NavLink to={routesPath.home} className="flex items-center hover:text-stone-400">
             <LogOutIcon
               className="h-5 w-5 inline mr-1 hover:text-inherit"
               onClick={()=>localStorage.removeItem(localStorageKeys.userLogin)}
