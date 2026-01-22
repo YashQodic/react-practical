@@ -57,16 +57,13 @@ function Sidebar(props: {
           <li
             className={
               location.pathname === '/product'
-                ? 'bg-gray-700 p-1 rounded-sm'
-                : 'hover:bg-gray-700 p-1 rounded-sm'
+                ? 'bg-gray-700 p-1 rounded-sm text-gray-100'
+                : 'hover:bg-gray-700 p-1 rounded-sm text-gray-800 hover:text-gray-100'
             }
           >
             <NavLink
               to={routesPath.product}
-              className={({ isActive }) =>
-                `block text-md font-bold transition-colors
-     ${isActive ? 'text-gray-100' : 'text-gray-800 hover:text-gray-100'}`
-              }
+              className="block text-md font-bold transition-colors"
             >
               <div className="flex items-center">
                 <BoxIcon className="h-5 w-5 inline mr-2" />
@@ -77,16 +74,13 @@ function Sidebar(props: {
           <li
             className={
               location.pathname === '/feature'
-                ? 'bg-gray-700 p-1 rounded-sm'
-                : 'hover:bg-gray-700 p-1 rounded-sm'
+                ? 'bg-gray-700 p-1 rounded-sm text-gray-100'
+                : 'hover:bg-gray-700 p-1 rounded-sm text-gray-800 hover:text-gray-100'
             }
           >
             <NavLink
               to={routesPath.feature}
-              className={({ isActive }) =>
-                `block text-md font-bold transition-colors
-     ${isActive ? 'text-gray-100' : 'text-gray-800 hover:text-gray-100'}`
-              }
+              className="block text-md font-bold transition-colors"
             >
               <div className="flex items-center">
                 <FeatherIcon className="h-5 w-5 inline mr-2" />
@@ -97,16 +91,13 @@ function Sidebar(props: {
           <li
             className={
               location.pathname === '/about'
-                ? 'bg-gray-700 p-1 rounded-sm'
-                : 'hover:bg-gray-700 p-1 rounded-sm'
+                ? 'bg-gray-700 p-1 rounded-sm text-gray-100'
+                : 'hover:bg-gray-700 p-1 rounded-sm text-gray-800 hover:text-gray-100'
             }
           >
             <NavLink
               to={routesPath.about}
-              className={({ isActive }) =>
-                `block text-md font-bold transition-colors
-     ${isActive ? 'text-gray-100' : 'text-gray-800 hover:text-gray-100'}`
-              }
+              className="block text-md font-bold transition-colors"
             >
               <div className="flex items-center">
                 <InfoIcon className="h-5 w-5 inline mr-2" />{' '}
@@ -117,16 +108,13 @@ function Sidebar(props: {
           <li
             className={
               location.pathname === '/contact'
-                ? 'bg-gray-700 p-1 rounded-sm'
-                : 'hover:bg-gray-700 p-1 rounded-sm'
+                ? 'bg-gray-700 p-1 rounded-sm text-gray-100'
+                : 'hover:bg-gray-700 p-1 rounded-sm text-gray-800 hover:text-gray-100'
             }
           >
             <NavLink
               to={routesPath.contact}
-              className={({ isActive }) =>
-                `block text-md font-bold transition-colors
-     ${isActive ? 'text-gray-100' : 'text-gray-800 hover:text-gray-100'}`
-              }
+              className="block text-md font-bold transition-colors"
             >
               <div className="flex items-center">
                 <ContactIcon className="h-5 w-5 mr-2" />
@@ -135,9 +123,9 @@ function Sidebar(props: {
             </NavLink>
           </li>
           <hr className="border-gray-700"></hr>
-          <li className="hover:bg-gray-700 p-1 rounded-sm">
+          <li className="hover:bg-gray-700 p-1 rounded-sm text-md text-gray-800 hover:text-gray-100 font-bold cursor-pointer">
             <div
-              className="block text-md text-gray-800 hover:text-gray-100 font-bold active:text-gray-100 active:font-bold cursor-pointer"
+              className="block"
               onClick={logOut}
             >
               <div className="flex items-center">
