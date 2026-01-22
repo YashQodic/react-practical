@@ -6,93 +6,137 @@ import {
   LogOutIcon,
   X,
 } from 'lucide-react';
-import { NavLink, useLocation } from 'react-router';
+import logo from '../../../public/vite.svg';
+import { NavLink, useLocation, useNavigate } from 'react-router';
 import { localStorageKeys, routesPath } from '../../utils/constants';
+import Footer from './Footer';
+import { sleep } from '../../utils/helper';
 
 function Sidebar(props: {
   menuStatus: boolean;
   setMenuStatus: (status: boolean) => void;
 }) {
-
   const location = useLocation();
+  const navigation = useNavigate();
+
+  const logOut = async () => {
+    localStorage.removeItem(localStorageKeys.userLogin);
+    await sleep(100);
+    navigation(routesPath.login);
+  };
 
   return props.menuStatus ? (
-    <aside className="fixed top-0 right-0 w-64 bg-gray-800 text-white h-screen p-4 pl-2 border-l border-gray-700 z-50 lg:hidden">
-      <div className="flex justify-end m-2">
-        <X
-          className="h-6 w-6 mb-4 cursor-pointer"
-          onClick={() => props.setMenuStatus(false)}
-        />
+    <aside
+      className={`
+        bg-blue-50 text-white w-64
+        lg:static lg:translate-x-0
+        fixed top-0 left-0 h-full z-50
+        transition-transform
+        flex flex-col
+        ${props.menuStatus ? 'translate-x-0' : '-translate-x-full'}
+      `}
+    >
+      <div className="flex lg:hidden items-center justify-between border-b border-gray-300">
+        <div className="flex items-center p-4">
+          <img
+            src={logo}
+            alt="App Logo"
+            className="h-8 w-8 inline-block mr-2"
+          />
+          <span className="text-xl font-bold text-gray-800">My App</span>
+        </div>
+        <div className="flex lg:hidden justify-end p-2">
+          <X
+            className="h-6 w-6 cursor-pointer text-gray-800 hover:bg-gray-800 hover:text-white rounded-sm"
+            onClick={() => props.setMenuStatus(false)}
+          />
+        </div>
       </div>
-      <ul className="space-y-4">
-        <li className={location.pathname === "/product" ? "bg-gray-700 p-1 rounded-sm" : "hover:bg-gray-700 p-1 rounded-sm"}>
-          <NavLink
-            to={routesPath.product}
-            className="block text-md text-gray-100 active:font-bold "
+      <div className="flex flex-1 flex-col justify-between">
+        <ul className="space-y-4 p-4">
+          <li
+            className={
+              location.pathname === '/product'
+                ? 'bg-gray-700 p-1 rounded-sm text-gray-100'
+                : 'hover:bg-gray-700 p-1 rounded-sm text-gray-800 hover:text-gray-100'
+            }
           >
-            <div className="flex items-center">
-              <BoxIcon className="h-5 w-5 inline mr-2" />
-              <p className="text-md text-gray-100 active:font-bold ">
-                Product
-              </p>
-            </div>
-          </NavLink>
-        </li>
-        <li className={location.pathname === "/feature" ? "bg-gray-700 p-1 rounded-sm" : "hover:bg-gray-700 p-1 rounded-sm"}>
-          <NavLink
-            to={routesPath.feature}
-            className="block text-md text-gray-100 active:font-bold "
+            <NavLink
+              to={routesPath.product}
+              className="block text-md font-bold transition-colors"
+            >
+              <div className="flex items-center">
+                <BoxIcon className="h-5 w-5 inline mr-2" />
+                <p className="font-inherit text-inherit">Product</p>
+              </div>
+            </NavLink>
+          </li>
+          <li
+            className={
+              location.pathname === '/feature'
+                ? 'bg-gray-700 p-1 rounded-sm text-gray-100'
+                : 'hover:bg-gray-700 p-1 rounded-sm text-gray-800 hover:text-gray-100'
+            }
           >
-            <div className="flex items-center">
-              <FeatherIcon className="h-5 w-5 inline mr-2" />
-              <p className="text-md text-gray-100 active:font-bold ">
-                Feature
-              </p>
-            </div>
-          </NavLink>
-        </li>
-        <li className={location.pathname === "/about" ? "bg-gray-700 p-1 rounded-sm" : "hover:bg-gray-700 p-1 rounded-sm"}>
-          <NavLink
-            to={routesPath.about}
-            className="block text-md text-gray-100 active:font-bold "
+            <NavLink
+              to={routesPath.feature}
+              className="block text-md font-bold transition-colors"
+            >
+              <div className="flex items-center">
+                <FeatherIcon className="h-5 w-5 inline mr-2" />
+                <p className="font-inherit text-inherit">Feature</p>
+              </div>
+            </NavLink>
+          </li>
+          <li
+            className={
+              location.pathname === '/about'
+                ? 'bg-gray-700 p-1 rounded-sm text-gray-100'
+                : 'hover:bg-gray-700 p-1 rounded-sm text-gray-800 hover:text-gray-100'
+            }
           >
-            <div className="flex items-center">
-              <InfoIcon className="h-5 w-5 inline mr-2" />{' '}
-              <p className="text-md text-gray-100 active:font-bold ">
-                About
-              </p>
-            </div>
-          </NavLink>
-        </li>
-        <li className={location.pathname === "/contact" ? "bg-gray-700 p-1 rounded-sm" : "hover:bg-gray-700 p-1 rounded-sm"}>
-          <NavLink
-            to={routesPath.contact}
-            className="block text-md text-gray-100 active:font-bold "
+            <NavLink
+              to={routesPath.about}
+              className="block text-md font-bold transition-colors"
+            >
+              <div className="flex items-center">
+                <InfoIcon className="h-5 w-5 inline mr-2" />{' '}
+                <p className="font-inherit text-inherit">About</p>
+              </div>
+            </NavLink>
+          </li>
+          <li
+            className={
+              location.pathname === '/contact'
+                ? 'bg-gray-700 p-1 rounded-sm text-gray-100'
+                : 'hover:bg-gray-700 p-1 rounded-sm text-gray-800 hover:text-gray-100'
+            }
           >
-            <div className="flex items-center">
-              <ContactIcon className="h-5 w-5 inline mr-2" />{' '}
-              <p className="text-md text-gray-100 active:font-bold ">
-                Contact
-              </p>
+            <NavLink
+              to={routesPath.contact}
+              className="block text-md font-bold transition-colors"
+            >
+              <div className="flex items-center">
+                <ContactIcon className="h-5 w-5 mr-2" />
+                <p className="font-inherit text-inherit">Contact</p>
+              </div>
+            </NavLink>
+          </li>
+          <hr className="border-gray-700"></hr>
+          <li className="hover:bg-gray-700 p-1 rounded-sm text-md text-gray-800 hover:text-gray-100 font-bold cursor-pointer">
+            <div
+              className="block"
+              onClick={logOut}
+            >
+              <div className="flex items-center">
+                <LogOutIcon className="h-5 w-5 inline mr-2" />{' '}
+                <p className="font-inherit text-inherit">Log out</p>
+              </div>
             </div>
-          </NavLink>
-        </li>
-        <hr className="border-gray-700"></hr>
-        <li className="hover:bg-gray-700 p-1 rounded-sm">
-          <NavLink
-            to={routesPath.login}
-            className="block text-md text-gray-100 active:font-bold "
-            onClick={()=>localStorage.removeItem(localStorageKeys.userLogin)}
-          >
-            <div className="flex items-center">
-              <LogOutIcon className="h-5 w-5 inline mr-2" />{' '}
-              <p className="text-md text-gray-100 active:font-bold ">
-                Log out
-              </p>
-            </div>
-          </NavLink>
-        </li>
-      </ul>
+          </li>
+        </ul>
+        <Footer />
+      </div>
     </aside>
   ) : null;
 }
