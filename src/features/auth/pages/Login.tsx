@@ -3,7 +3,8 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import { signUpSchema, type TSingUpSchema } from '../schemas/login.schema';
 import { NavLink, useNavigate } from 'react-router';
 import { Loader } from 'lucide-react';
-import { localStorageKeys, routesPath } from '../../../utils/constants';
+import { routesPath } from '../../../utils/constants';
+import { useAuthStore } from '../../../store/authStore';
 
 function Login() {
   const {
@@ -15,12 +16,13 @@ function Login() {
     resolver: zodResolver(signUpSchema),
   });
   const navigate = useNavigate();
+  const { login , storeUserDetails } = useAuthStore();
 
   const onSubmit: SubmitHandler<TSingUpSchema> = async (data) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log('Data', data);
+    storeUserDetails({ username: data.username });
     reset();
-    localStorage.setItem(localStorageKeys.userLogin, JSON.stringify(true));
+    login();
     navigate(routesPath.product);
   };
 

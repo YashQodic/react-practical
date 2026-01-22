@@ -8,9 +8,10 @@ import {
 } from 'lucide-react';
 import logo from '../../../public/vite.svg';
 import { NavLink, useLocation, useNavigate } from 'react-router';
-import { localStorageKeys, routesPath } from '../../utils/constants';
+import { routesPath } from '../../utils/constants';
 import Footer from './Footer';
 import { sleep } from '../../utils/helper';
+import { useAuthStore } from '../../store/authStore';
 
 function Sidebar(props: {
   menuStatus: boolean;
@@ -18,9 +19,10 @@ function Sidebar(props: {
 }) {
   const location = useLocation();
   const navigation = useNavigate();
+  const { logout: userLogout } = useAuthStore();
 
   const logOut = async () => {
-    localStorage.removeItem(localStorageKeys.userLogin);
+    userLogout();
     await sleep(100);
     navigation(routesPath.login);
   };
@@ -57,8 +59,8 @@ function Sidebar(props: {
           <li
             className={
               location.pathname === '/product'
-                ? 'bg-gray-700 p-1 rounded-sm text-gray-100'
-                : 'hover:bg-gray-700 p-1 rounded-sm text-gray-800 hover:text-gray-100'
+                ? 'bg-gray-600 p-1 rounded-sm text-gray-100'
+                : 'hover:bg-gray-600 p-1 rounded-sm text-gray-800 hover:text-gray-100'
             }
           >
             <NavLink
@@ -74,8 +76,8 @@ function Sidebar(props: {
           <li
             className={
               location.pathname === '/feature'
-                ? 'bg-gray-700 p-1 rounded-sm text-gray-100'
-                : 'hover:bg-gray-700 p-1 rounded-sm text-gray-800 hover:text-gray-100'
+                ? 'bg-gray-600 p-1 rounded-sm text-gray-100'
+                : 'hover:bg-gray-600 p-1 rounded-sm text-gray-800 hover:text-gray-100'
             }
           >
             <NavLink
@@ -91,8 +93,8 @@ function Sidebar(props: {
           <li
             className={
               location.pathname === '/about'
-                ? 'bg-gray-700 p-1 rounded-sm text-gray-100'
-                : 'hover:bg-gray-700 p-1 rounded-sm text-gray-800 hover:text-gray-100'
+                ? 'bg-gray-600 p-1 rounded-sm text-gray-100'
+                : 'hover:bg-gray-600 p-1 rounded-sm text-gray-800 hover:text-gray-100'
             }
           >
             <NavLink
@@ -108,8 +110,8 @@ function Sidebar(props: {
           <li
             className={
               location.pathname === '/contact'
-                ? 'bg-gray-700 p-1 rounded-sm text-gray-100'
-                : 'hover:bg-gray-700 p-1 rounded-sm text-gray-800 hover:text-gray-100'
+                ? 'bg-gray-600 p-1 rounded-sm text-gray-100'
+                : 'hover:bg-gray-600 p-1 rounded-sm text-gray-800 hover:text-gray-100'
             }
           >
             <NavLink
@@ -121,18 +123,6 @@ function Sidebar(props: {
                 <p className="font-inherit text-inherit">Contact</p>
               </div>
             </NavLink>
-          </li>
-          <hr className="border-gray-700"></hr>
-          <li className="hover:bg-gray-700 p-1 rounded-sm text-md text-gray-800 hover:text-gray-100 font-bold cursor-pointer">
-            <div
-              className="block"
-              onClick={logOut}
-            >
-              <div className="flex items-center">
-                <LogOutIcon className="h-5 w-5 inline mr-2" />{' '}
-                <p className="font-inherit text-inherit">Log out</p>
-              </div>
-            </div>
           </li>
         </ul>
         <Footer />
