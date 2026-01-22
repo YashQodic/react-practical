@@ -9,56 +9,15 @@ function Header(props: {
 }) {
 
   return (
-    <header className="p-4 bg-gray-800 text-white">
+    <header className="p-4 bg-gray-800 text-white border-b border-gray-700">
       <nav className="flex gap-4 items-center">
-        <div>
+        <div className="flex items-center">
           <img
             src={logo}
             alt="App Logo"
             className="h-8 w-8 inline-block mr-2"
           />
-        </div>
-        <div className="hidden lg:flex gap-3">
-          <NavLink
-            to={routesPath.product}
-            className={({ isActive }) =>
-              `block text-md hover:text-stone-400 ${
-                isActive ? 'font-bold text-white' : 'text-gray-100'
-              }`
-            }
-          >
-            Product
-          </NavLink>
-          <NavLink
-            to={routesPath.feature}
-            className={({ isActive }) =>
-              `block text-md hover:text-stone-400 ${
-                isActive ? 'font-bold text-white' : 'text-gray-100'
-              }`
-            }
-          >
-            Feature
-          </NavLink>
-          <NavLink
-            to={routesPath.about}
-            className={({ isActive }) =>
-              `block text-md hover:text-stone-400 ${
-                isActive ? 'font-bold text-white' : 'text-gray-100'
-              }`
-            }
-          >
-            About
-          </NavLink>
-          <NavLink
-            to={routesPath.contact}
-            className={({ isActive }) =>
-              `block text-md hover:text-stone-400 ${
-                isActive ? 'font-bold text-white' : 'text-gray-100'
-              }`
-            }
-          >
-            Contact
-          </NavLink>
+          <span className="text-xl font-bold">My App</span>
         </div>
         <div className="flex lg:hidden flex-1 justify-end items-end">
           {!props.menuStatus ? (
@@ -69,12 +28,6 @@ function Header(props: {
           ) : null}
         </div>
         <div className="hidden lg:flex flex-1 justify-end items-end">
-          <NavLink to={routesPath.home} className="flex items-center hover:text-stone-400">
-            <LogOutIcon
-              className="h-5 w-5 inline mr-1 hover:text-inherit"
-              onClick={()=>localStorage.removeItem(localStorageKeys.userLogin)}
-            />
-          </NavLink>
         </div>
       </nav>
     </header>
