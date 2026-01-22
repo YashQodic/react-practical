@@ -1,1 +1,83 @@
 @import "tailwindcss";
+
+/* ================================
+   Radix Color Tokens
+================================ */
+:root {
+  --violet-1: #fdfcfe;
+  --violet-4: #ebe4ff;
+  --violet-7: #c2b5f5;
+  --violet-8: #aa99ec;
+  --violet-9: #6e56cf;
+  --violet-11: #5746af;
+  --violet-12: #2f265f;
+
+  --blackA-9: rgba(0, 0, 0, 0.439);
+
+  --mauve-11: #6f6e77;
+  --mauve-12: #1c1b22;
+
+  --green-4: #e9f9ee;
+  --green-5: #dff3e6;
+  --green-6: #ccebd7;
+  --green-9: #30a46c;
+  --green-11: #18794e;
+
+  --gray-1: #fcfcfc;
+  --gray-3: #f1f1f1;
+}
+
+/* ================================
+   Tailwind Theme Tokens
+================================ */
+@theme {
+  /* Colors */
+  --color-violet-1: var(--violet-1);
+  --color-violet-4: var(--violet-4);
+  --color-violet-7: var(--violet-7);
+  --color-violet-8: var(--violet-8);
+  --color-violet-9: var(--violet-9);
+  --color-violet-11: var(--violet-11);
+  --color-violet-12: var(--violet-12);
+
+  --color-blackA-9: var(--blackA-9);
+
+  --color-mauve-11: var(--mauve-11);
+  --color-mauve-12: var(--mauve-12);
+
+  --color-green-4: var(--green-4);
+  --color-green-5: var(--green-5);
+  --color-green-6: var(--green-6);
+  --color-green-9: var(--green-9);
+  --color-green-11: var(--green-11);
+
+  --color-gray-1: var(--gray-1);
+  --color-gray-3: var(--gray-3);
+
+  /* Shadows */
+  --shadow-6: 0 10px 38px -10px rgba(22,23,24,.35),
+              0 10px 20px -15px rgba(22,23,24,.2);
+
+  /* Animations */
+  --animate-overlayShow: overlayShow 150ms cubic-bezier(0.16,1,0.3,1);
+  --animate-contentShow: contentShow 150ms cubic-bezier(0.16,1,0.3,1);
+}
+
+/* ================================
+   Keyframes
+================================ */
+@keyframes overlayShow {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes contentShow {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}

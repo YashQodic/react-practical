@@ -1,9 +1,10 @@
 import { Outlet, Navigate } from "react-router";
-import { localStorageKeys, routesPath } from "../utils/constants";
+import { routesPath } from "../utils/constants";
+import { useAuthStore } from "../store/authStore";
 
 function AuthRoutes() {
-  const userLogin = localStorage.getItem(localStorageKeys.userLogin) || false;
-  return !userLogin ? <Outlet /> : <Navigate to={routesPath.product} replace />;
+  const { isAuthenticated } = useAuthStore();
+  return !isAuthenticated ? <Outlet /> : <Navigate to={routesPath.product} replace />;
 }
 
 export default AuthRoutes;

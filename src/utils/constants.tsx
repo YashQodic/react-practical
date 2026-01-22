@@ -9,7 +9,3 @@ export const routesPath = {
   contact: '/contact',
   notfound: '/*',
 };
-
-export const localStorageKeys = {
-  userLogin: 'userLogin',
-};
