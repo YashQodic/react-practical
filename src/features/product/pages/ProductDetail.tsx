@@ -1,26 +1,19 @@
-import { NavLink, useLocation } from 'react-router';
+import { NavLink, useLocation, useNavigate } from 'react-router';
 import { useProductStore } from '../../../store/productStore';
 import { useEffect, useState } from 'react';
 import type { ProductInterface } from '../interface/product.interface';
-import {
-  AlignRight,
-  ArrowRight,
-  MoveRight,
-  MoveRightIcon,
-  PanelRight,
-  PanelRightOpen,
-  ToggleRight,
-} from 'lucide-react';
 import { routesPath } from '../../../utils/constants';
+import DialogBox from '../../../components/common/DialogBox';
+import DeletProduct from './DeletProduct';
 
 function ProductDetail() {
   const location = useLocation();
-  const { products } = useProductStore();
+  const { products, setProducts } = useProductStore();
   const [productDetail, setProductDetail] = useState<ProductInterface | null>(
     null,
   );
   const [productImage, setProductImage] = useState<string | null>(null);
-
+  const navigation = useNavigate();
   useEffect(() => {
     if (!location.state?.id || !products.length) return;
 
@@ -33,28 +26,35 @@ function ProductDetail() {
     return <div className="p-6 text-gray-500">Loading product details...</div>;
   }
 
+  const handleDeleteProduct = (id: number) => {
+    const filterProducts = products.filter(
+      (product: ProductInterface) => product.id !== id,
+    );
+    setProducts(filterProducts);
+    navigation(routesPath.product);
+  };
+
   return (
     <div className="max-w-6xl p-6">
-        <nav aria-label="Breadcrumb" className="mb-6">
-          <ol className="flex items-center gap-2 text-sm text-gray-500">
-            <li>
-              <NavLink
-                to={routesPath.product}
-                className="hover:text-gray-900 transition"
-              >
-                Product List
-              </NavLink>
-            </li>
+      <nav aria-label="Breadcrumb" className="mb-6">
+        <ol className="flex items-center gap-2 text-sm text-gray-500">
+          <li>
+            <NavLink
+              to={routesPath.product}
+              className="hover:text-gray-900 transition"
+            >
+              Product List
+            </NavLink>
+          </li>
 
-            <li className="text-gray-400">/</li>
+          <li className="text-gray-400">/</li>
 
-            <li className="font-medium text-gray-900 truncate max-w-[240px]">
-              {productDetail.title}
-            </li>
-          </ol>
-        </nav>
+          <li className="font-medium text-gray-900 truncate max-w-[240px]">
+            {productDetail.title}
+          </li>
+        </ol>
+      </nav>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-
         <div className="space-y-4">
           <div className="overflow-hidden rounded-xl border">
             <img
@@ -96,13 +96,17 @@ function ProductDetail() {
           </p>
 
           <div className="flex gap-4 pt-4">
-            <button className="flex-1 rounded-xl bg-green-600 px-6 py-3 text-white font-medium hover:bg-green-700 transition">
-              Add to Cart
+            <button className="flex-1 rounded-xl bg-yellow-200 px-6 py-3 text-black font-medium hover:bg-gray-400 transition cursor-pointer">
+              UPDATE
             </button>
-
-            <button className="flex-1 rounded-xl border border-gray-300 px-6 py-3 font-medium hover:bg-gray-100 transition">
-              Buy Now
-            </button>
+            <DialogBox
+              triggerChild={
+                <button className="flex-1 rounded-xl border border-gray-300 px-6 py-3 font-medium hover:bg-red-400 transition cursor-pointer">
+                  DELETE
+                </button>
+              }
+              portalChild={<DeletProduct handleDeleteProduct={handleDeleteProduct} productId={productDetail.id}/>}
+            />
           </div>
 
           <div className="border-t pt-4 text-sm text-gray-500">

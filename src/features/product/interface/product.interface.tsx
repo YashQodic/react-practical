@@ -16,3 +16,8 @@ export interface ProductInterface   {
     creationAt: string;
     updatedAt: string;
 }
+
+export interface DeletProductInterface {
+  handleDeleteProduct: (productId: number) => void;
+  productId: number;
+}
