@@ -5,6 +5,7 @@ import type { ProductInterface } from '../interface/product.interface';
 import { routesPath } from '../../../utils/constants';
 import DialogBox from '../../../components/common/DialogBox';
 import DeletProduct from './DeletProduct';
+import UpdateProduct from './UpdateProduct';
 
 function ProductDetail() {
   const location = useLocation();
@@ -33,6 +34,10 @@ function ProductDetail() {
     setProducts(filterProducts);
     navigation(routesPath.product);
   };
+
+  const handleUpdateProduct = (product:ProductInterface) =>{
+
+  }
 
   return (
     <div className="max-w-6xl p-6">
@@ -96,16 +101,26 @@ function ProductDetail() {
           </p>
 
           <div className="flex gap-4 pt-4">
-            <button className="flex-1 rounded-xl bg-yellow-200 px-6 py-3 text-black font-medium hover:bg-gray-400 transition cursor-pointer">
-              UPDATE
-            </button>
+            <DialogBox
+              triggerChild={
+                <button className="flex-1 rounded-xl bg-yellow-200 px-6 py-3 text-black font-medium hover:bg-gray-400 transition cursor-pointer">
+                  UPDATE
+                </button>
+              }
+              portalChild={<UpdateProduct handleUpdateProduct={handleUpdateProduct} product={productDetail}/>}
+            />
             <DialogBox
               triggerChild={
                 <button className="flex-1 rounded-xl border border-gray-300 px-6 py-3 font-medium hover:bg-red-400 transition cursor-pointer">
                   DELETE
                 </button>
               }
-              portalChild={<DeletProduct handleDeleteProduct={handleDeleteProduct} productId={productDetail.id}/>}
+              portalChild={
+                <DeletProduct
+                  handleDeleteProduct={handleDeleteProduct}
+                  productId={productDetail.id}
+                />
+              }
             />
           </div>
 
