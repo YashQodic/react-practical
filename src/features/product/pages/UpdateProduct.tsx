@@ -6,6 +6,9 @@ import {
 } from '../interface/product.interface';
 import { useProductStore } from '../../../store/productStore';
 import { X } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { productSchema } from '../schemas/product.schema';
 
 function UpdateProduct(props: UpdateProductInterface) {
   const [images, setImages] = useState<any>([]);
@@ -13,6 +16,15 @@ function UpdateProduct(props: UpdateProductInterface) {
   const [product, setProduct] = useState<ProductInterface | null>(null);
   const { categorys, getCategoryAPICall } = useProductStore();
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: zodResolver(productSchema)
+  });
+
+  const onSubmit = () => {};
   const handleImageChange = (e: any) => {
     const files = Array.from(e.target.files);
     setImages((prev: any) => [...prev, ...files]);
@@ -20,6 +32,25 @@ function UpdateProduct(props: UpdateProductInterface) {
 
   const removeImage = (index: number) => {
     setImages((prev: any) => prev.filter((_: any, i: number) => i !== index));
+  };
+
+  const handleCategorySelection = (e: any) => {
+    if (!product) return;
+
+    const selectedCategory = categorys.find(
+      (ctg) => ctg.slug === e.target.value,
+    );
+
+    if (!selectedCategory) return;
+
+    setProduct({
+      ...product,
+      category: {
+        ...product.category,
+        name: selectedCategory.name,
+        slug: selectedCategory.slug,
+      },
+    });
   };
 
   useEffect(() => {
@@ -54,7 +85,10 @@ function UpdateProduct(props: UpdateProductInterface) {
 
         <hr className="my-4 border-gray-200" />
 
-        <form className="space-y-5 scrollbar overflow-auto h-128 px-6">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="space-y-5 scrollbar overflow-auto h-128 px-6"
+        >
           <div className="space-y-1">
             <label className="block text-sm font-medium text-gray-700">
               Select Category
@@ -62,6 +96,7 @@ function UpdateProduct(props: UpdateProductInterface) {
             <select
               value={product?.category.slug}
               className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-100"
+              onChange={(e) => {handleCategorySelection(e)}}
             >
               {categorys.length > 0 &&
                 categorys.map((ctg) => (
@@ -95,7 +130,12 @@ function UpdateProduct(props: UpdateProductInterface) {
                     <img
                       src={imgUrl}
                       alt="preview"
-                      className="h-full w-full object-cover"
+                      className={`h-full w-full object-cover ${
+                        imgUrl === categoryImage
+                          ? 'border-4 border-green-600'
+                          : ''
+                      }`}
+                      onClick={() => setCategoryImage(imgUrl)}
                     />
 
                     <button
@@ -144,34 +184,69 @@ function UpdateProduct(props: UpdateProductInterface) {
           </div>
 
           <div className="space-y-1">
-            <label className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="title"
+              className="block text-sm font-medium text-gray-700"
+            >
               Title
             </label>
             <input
               type="text"
+              id="title"
               value={product?.title}
+              {...register('title')}
               className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-100"
+              onChange={(e) =>
+                product && setProduct({ ...product, title: e.target.value })
+              }
             />
+            {errors.title && (
+              <span className="text-red-400 text-sm">
+                {errors.title.message}
+              </span>
+            )}
           </div>
 
           <div className="space-y-1">
-            <label className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="description"
+              className="block text-sm font-medium text-gray-700"
+            >
               Description
             </label>
             <textarea
               rows={3}
               value={product?.description}
+              id="description"
+              {...register('description')}
+              onChange={(e) =>
+                product &&
+                setProduct({ ...product, description: e.target.value })
+              }
               className="w-full resize-none rounded-md border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-100"
             />
+            {errors.description && (
+              <span className="text-red-400 text-sm">
+                {errors.description.message}
+              </span>
+            )}
           </div>
 
           <div className="space-y-1">
-            <label className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="price"
+              className="block text-sm font-medium text-gray-700"
+            >
               Price
             </label>
             <input
               type="number"
+              id="price"
               value={product?.price}
+              onChange={(e) =>
+                product &&
+                setProduct({ ...product, price: Number(e.target.value) })
+              }
               className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-100"
             />
           </div>
@@ -189,6 +264,7 @@ function UpdateProduct(props: UpdateProductInterface) {
             <button
               type="submit"
               className="rounded-md bg-blue-600 px-5 py-2 text-sm text-white hover:bg-blue-700"
+              disabled={isSubmitting}
             >
               Update
             </button>
