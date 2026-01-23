@@ -9,6 +9,7 @@ import { X } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { productSchema } from '../schemas/product.schema';
+import DialogBox from '../../../components/common/DialogBox';
 
 function UpdateProduct(props: UpdateProductInterface) {
   const [images, setImages] = useState<any>([]);
@@ -68,8 +69,8 @@ function UpdateProduct(props: UpdateProductInterface) {
     <Dialog.Portal>
       <Dialog.Overlay className="fixed inset-0 bg-black/40 backdrop-blur-sm" />
 
-      <Dialog.Content className="fixed left-1/2 top-1/2 max-h-[85vh] w-[90vw] max-w-125 -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-lg bg-white py-6 shadow-lg focus:outline-none">
-        <div className="flex justify-between px-6">
+      <Dialog.Content className="fixed left-1/2 top-1/2 max-h-[85vh] w-[90vw] max-w-125 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white py-6 shadow-lg focus:outline-none overflow-hidden">
+        <div className="flex justify-between px-8">
           <Dialog.Title className="text-lg font-semibold text-gray-800">
             Update Product
           </Dialog.Title>
@@ -87,7 +88,7 @@ function UpdateProduct(props: UpdateProductInterface) {
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="space-y-5 scrollbar overflow-auto h-128 px-6"
+          className="space-y-5 scrollbar overflow-auto h-128 px-6 pb-18 lg:pb-0"
         >
           <div className="space-y-1">
             <label className="block text-sm font-medium text-gray-700">
@@ -96,7 +97,9 @@ function UpdateProduct(props: UpdateProductInterface) {
             <select
               value={product?.category.slug}
               className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-100"
-              onChange={(e) => {handleCategorySelection(e)}}
+              onChange={(e) => {
+                handleCategorySelection(e);
+              }}
             >
               {categorys.length > 0 &&
                 categorys.map((ctg) => (
@@ -255,19 +258,21 @@ function UpdateProduct(props: UpdateProductInterface) {
             <Dialog.Close asChild>
               <button
                 type="button"
-                className="rounded-md border px-4 py-2 text-sm hover:bg-gray-100"
+                className="rounded-md border px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer"
               >
                 Cancel
               </button>
             </Dialog.Close>
 
-            <button
-              type="submit"
-              className="rounded-md bg-blue-600 px-5 py-2 text-sm text-white hover:bg-blue-700"
-              disabled={isSubmitting}
-            >
-              Update
-            </button>
+            <Dialog.Close asChild>
+              <button
+                type="submit"
+                className="rounded-md bg-blue-600 px-5 py-2 text-sm text-white hover:bg-blue-700 cursor-pointer"
+                disabled={isSubmitting}
+              >
+                Update
+              </button>
+            </Dialog.Close>
           </div>
         </form>
       </Dialog.Content>
