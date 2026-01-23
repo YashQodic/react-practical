@@ -14,7 +14,25 @@ import DialogBox from '../../../components/common/DialogBox';
 function UpdateProduct(props: UpdateProductInterface) {
   const [images, setImages] = useState<any>([]);
   const [categoryImage, setCategoryImage] = useState<any>();
-  const [product, setProduct] = useState<ProductInterface | null>(null);
+  const [product, setProduct] = useState<ProductInterface>({
+    id: 0,
+    title: "",
+    slug: "",
+    price: 0,
+    description: "",
+    category: {
+      id: 0,
+      name: "",
+      slug: "",
+      image: "",
+      creationAt: "",
+      updatedAt: ""
+    },
+    images: [],
+    creationAt: "",
+    updatedAt: "",
+
+  });
   const { categorys, getCategoryAPICall } = useProductStore();
 
   const {
@@ -25,7 +43,11 @@ function UpdateProduct(props: UpdateProductInterface) {
     resolver: zodResolver(productSchema)
   });
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    props.handleUpdateProduct(product);
+    props.setOpen(false);
+  };
+
   const handleImageChange = (e: any) => {
     const files = Array.from(e.target.files);
     setImages((prev: any) => [...prev, ...files]);
@@ -69,7 +91,7 @@ function UpdateProduct(props: UpdateProductInterface) {
     <Dialog.Portal>
       <Dialog.Overlay className="fixed inset-0 bg-black/40 backdrop-blur-sm" />
 
-      <Dialog.Content className="fixed left-1/2 top-1/2 max-h-[85vh] w-[90vw] max-w-125 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white py-6 shadow-lg focus:outline-none overflow-hidden">
+      <Dialog.Content className="fixed left-1/2 top-1/2 w-[90vw] max-w-125 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white py-6 shadow-lg focus:outline-none overflow-hidden">
         <div className="flex justify-between px-8">
           <Dialog.Title className="text-lg font-semibold text-gray-800">
             Update Product
@@ -264,7 +286,6 @@ function UpdateProduct(props: UpdateProductInterface) {
               </button>
             </Dialog.Close>
 
-            <Dialog.Close asChild>
               <button
                 type="submit"
                 className="rounded-md bg-blue-600 px-5 py-2 text-sm text-white hover:bg-blue-700 cursor-pointer"
@@ -272,7 +293,6 @@ function UpdateProduct(props: UpdateProductInterface) {
               >
                 Update
               </button>
-            </Dialog.Close>
           </div>
         </form>
       </Dialog.Content>

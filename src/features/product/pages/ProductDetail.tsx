@@ -15,6 +15,8 @@ function ProductDetail() {
   );
   const [productImage, setProductImage] = useState<string | null>(null);
   const navigation = useNavigate();
+  const [open, setOpen] = useState(false);
+
   useEffect(() => {
     if (!location.state?.id || !products.length) return;
 
@@ -36,7 +38,7 @@ function ProductDetail() {
   };
 
   const handleUpdateProduct = (product:ProductInterface) =>{
-
+    setProductDetail(product);
   }
 
   return (
@@ -107,7 +109,8 @@ function ProductDetail() {
                   UPDATE
                 </button>
               }
-              portalChild={<UpdateProduct handleUpdateProduct={handleUpdateProduct} product={productDetail}/>}
+              portalChild={<UpdateProduct handleUpdateProduct={handleUpdateProduct} product={productDetail} setOpen={setOpen}/>}
+              open={open} setOpen={setOpen}
             />
             <DialogBox
               triggerChild={
