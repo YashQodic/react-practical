@@ -19,7 +19,7 @@ function ProductList({ product }: ProductListProps) {
     <div className="h-full" onClick={()=>handleNavigaiton(product.id)}>
       <div
         key={product.id}
-        className="group rounded-xl overflow-hidden bg-white shadow-sm border border-gray-200"
+        className="group h-full rounded-xl overflow-hidden bg-white shadow-sm border border-gray-200 flex flex-col"
       >
         <div className="h-56 overflow-hidden">
           <img
