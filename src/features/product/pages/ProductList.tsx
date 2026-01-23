@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router';
 import { type ProductInterface } from '../interface/product.interface';
 import { routesPath } from '../../../utils/constants';
+import DEFAULT_IMAGE from "../../../assets/image/600x400.png"
 
 type ProductListProps = {
   product: ProductInterface;
@@ -13,6 +14,7 @@ function ProductList({ product }: ProductListProps) {
       state: { id },
     });
   };
+
   return (
     <div className="h-full" onClick={()=>handleNavigaiton(product.id)}>
       <div
@@ -21,9 +23,14 @@ function ProductList({ product }: ProductListProps) {
       >
         <div className="h-56 overflow-hidden">
           <img
-            src={product.category.image}
+            src={product.images[0] ? product.images[0] :product.category.image}
             alt={product.title}
             className="h-full w-full object-cover"
+            onError={(e) => {
+              const target = e.currentTarget;
+              target.onerror = null; // prevent infinite loop
+              target.src = DEFAULT_IMAGE;
+            }}
           />
         </div>
         <div className="p-5 space-y-2">
