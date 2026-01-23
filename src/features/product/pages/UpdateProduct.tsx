@@ -92,7 +92,7 @@ function UpdateProduct(props: UpdateProductInterface) {
       <Dialog.Overlay className="fixed inset-0 bg-black/40 backdrop-blur-sm" />
 
       <Dialog.Content className="fixed left-1/2 top-1/2 w-[90vw] max-w-125 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white py-6 shadow-lg focus:outline-none overflow-hidden">
-        <div className="flex justify-between px-8">
+        <div className="flex justify-between px-6">
           <Dialog.Title className="text-lg font-semibold text-gray-800">
             Update Product
           </Dialog.Title>
@@ -110,7 +110,7 @@ function UpdateProduct(props: UpdateProductInterface) {
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="space-y-5 scrollbar overflow-auto h-128 px-6 pb-18 lg:pb-0"
+          className="space-y-5 scrollbar overflow-auto h-128 px-6"
         >
           <div className="space-y-1">
             <label className="block text-sm font-medium text-gray-700">
