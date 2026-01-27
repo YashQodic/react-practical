@@ -2,11 +2,15 @@ import { useEffect, useState, useTransition, useMemo } from 'react';
 import { useProductStore } from '../../../store/productStore';
 import LoaderComponents from '../../../components/common/Loader';
 import ProductList from './ProductList';
+import UpdateProduct from './UpdateProduct';
+import type { ProductInterface } from '../interface/product.interface';
+import DialogBox from '../../../components/common/DialogBox';
 
 function Product() {
   const { products, getProductsAPICall } = useProductStore();
   const [isPending, startTransition] = useTransition();
   const [search, setSearch] = useState('');
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     startTransition(() => getProductsAPICall());
@@ -23,6 +27,10 @@ function Product() {
         product.category.name.toLowerCase().includes(query),
     );
   }, [products, search]);
+
+  const handleUpdateProduct = (product:ProductInterface) => {
+    console.log("New product added :",product);
+  }
 
   if (isPending) {
     return <LoaderComponents />;
@@ -44,9 +52,16 @@ function Product() {
           "
           />
         </div>
-        <button className="rounded-xl bg-green-300 px-6 py-3 text-gray-800 font-medium hover:bg-green-500 transition cursor-pointer">
+        <DialogBox
+              triggerChild={
+             <button className="rounded-xl bg-green-300 px-6 py-3 text-gray-800 font-medium hover:bg-green-500 transition cursor-pointer">
           Add new
         </button>
+              }
+              portalChild={<UpdateProduct handleUpdateProduct={handleUpdateProduct} setOpen={setOpen}/>}
+              open={open} setOpen={setOpen}
+            />
+      
       </div>
       <div
         className="

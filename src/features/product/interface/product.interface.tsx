@@ -25,7 +25,7 @@ export interface DeletProductInterface {
 export interface UpdateProductInterface {
   handleUpdateProduct: (product: ProductInterface) => void;
   setOpen: (open: boolean) => void
-  product: ProductInterface;
+  product?: ProductInterface;
 }
 
 export interface ProductCategory {

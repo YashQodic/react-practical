@@ -43,8 +43,13 @@ function UpdateProduct(props: UpdateProductInterface) {
     resolver: zodResolver(productSchema)
   });
 
-  const onSubmit = () => {
-    props.handleUpdateProduct(product);
+  const onSubmit = (data:any) => {
+    let newProduct = {
+      ...product,
+      title:data.title,
+      description:data.description
+    }
+    props.handleUpdateProduct(newProduct);
     props.setOpen(false);
   };
 
@@ -70,6 +75,7 @@ function UpdateProduct(props: UpdateProductInterface) {
       ...product,
       category: {
         ...product.category,
+        id: selectedCategory.id,
         name: selectedCategory.name,
         slug: selectedCategory.slug,
       },
@@ -77,7 +83,7 @@ function UpdateProduct(props: UpdateProductInterface) {
   };
 
   useEffect(() => {
-    setProduct(props.product);
+    props.product && setProduct(props.product);
     getCategoryAPICall();
   }, []);
 
@@ -218,12 +224,9 @@ function UpdateProduct(props: UpdateProductInterface) {
             <input
               type="text"
               id="title"
-              value={product?.title}
+              defaultValue={product?.title}
               {...register('title')}
               className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-100"
-              onChange={(e) =>
-                product && setProduct({ ...product, title: e.target.value })
-              }
             />
             {errors.title && (
               <span className="text-red-400 text-sm">
@@ -241,13 +244,9 @@ function UpdateProduct(props: UpdateProductInterface) {
             </label>
             <textarea
               rows={3}
-              value={product?.description}
+              defaultValue={product?.description}
               id="description"
               {...register('description')}
-              onChange={(e) =>
-                product &&
-                setProduct({ ...product, description: e.target.value })
-              }
               className="w-full resize-none rounded-md border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-100"
             />
             {errors.description && (
