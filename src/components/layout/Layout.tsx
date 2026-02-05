@@ -2,6 +2,7 @@ import { Outlet } from 'react-router';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import { useState } from 'react';
+import Footer from './Footer';
 
 function Layout() {
   
@@ -12,6 +13,7 @@ function Layout() {
       <Header menuStatus={menuStatus} setMenuStatus={setMenuStatus} />
       <Sidebar menuStatus={menuStatus} setMenuStatus={setMenuStatus} />
       <Outlet />
+      <Footer/>
     </>
   );
 }
