@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { NavLink } from "react-router";
 import { registerSchema, type TRegisterSchema } from "../schemas/register.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { routesPath } from "../../../utils/constants";
 
 function Register() {
     const {
@@ -102,7 +103,7 @@ function Register() {
           <p className="mt-10 text-center text-sm/6 text-gray-400">
             Do you have an account?
             <NavLink
-              to="/"
+              to={routesPath.home}
               className="ml-1 font-semibold text-indigo-400 hover:text-indigo-300"
             >
               Sign in now

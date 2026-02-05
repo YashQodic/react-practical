@@ -3,6 +3,7 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import { signUpSchema, type TSingUpSchema } from '../schemas/login.schema';
 import { NavLink, useNavigate } from 'react-router';
 import { Loader } from 'lucide-react';
+import { localStorageKeys, routesPath } from '../../../utils/constants';
 
 function Login() {
   const {
@@ -19,8 +20,8 @@ function Login() {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     console.log('Data', data);
     reset();
-    localStorage.setItem('userLogin', JSON.stringify(true));
-    navigate('/product');
+    localStorage.setItem(localStorageKeys.userLogin, JSON.stringify(true));
+    navigate(routesPath.product);
   };
 
   return (
@@ -65,7 +66,7 @@ function Login() {
               </label>
               <div className="text-sm">
                 <NavLink
-                  to="/forgot-password"
+                  to={routesPath.forgotPassword}
                   className="font-semibold text-indigo-400 hover:text-indigo-300"
                 >
                   Forgot password?
@@ -96,7 +97,7 @@ function Login() {
         <p className="mt-10 text-center text-sm/6 text-gray-400">
           Don't have an account?
           <NavLink
-            to="/register"
+            to={routesPath.register}
             className="ml-1 font-semibold text-indigo-400 hover:text-indigo-300"
           >
             Sign up now

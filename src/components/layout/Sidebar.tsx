@@ -7,6 +7,7 @@ import {
   X,
 } from 'lucide-react';
 import { NavLink, useLocation } from 'react-router';
+import { localStorageKeys, routesPath } from '../../utils/constants';
 
 function Sidebar(props: {
   menuStatus: boolean;
@@ -26,7 +27,7 @@ function Sidebar(props: {
       <ul className="space-y-4">
         <li className={location.pathname === "/product" ? "bg-gray-700 p-1 rounded-sm" : "hover:bg-gray-700 p-1 rounded-sm"}>
           <NavLink
-            to="/product"
+            to={routesPath.product}
             className="block text-md text-gray-100 active:font-bold "
           >
             <div className="flex items-center">
@@ -39,7 +40,7 @@ function Sidebar(props: {
         </li>
         <li className={location.pathname === "/feature" ? "bg-gray-700 p-1 rounded-sm" : "hover:bg-gray-700 p-1 rounded-sm"}>
           <NavLink
-            to="/feature"
+            to={routesPath.feature}
             className="block text-md text-gray-100 active:font-bold "
           >
             <div className="flex items-center">
@@ -52,7 +53,7 @@ function Sidebar(props: {
         </li>
         <li className={location.pathname === "/about" ? "bg-gray-700 p-1 rounded-sm" : "hover:bg-gray-700 p-1 rounded-sm"}>
           <NavLink
-            to="/about"
+            to={routesPath.about}
             className="block text-md text-gray-100 active:font-bold "
           >
             <div className="flex items-center">
@@ -65,7 +66,7 @@ function Sidebar(props: {
         </li>
         <li className={location.pathname === "/contact" ? "bg-gray-700 p-1 rounded-sm" : "hover:bg-gray-700 p-1 rounded-sm"}>
           <NavLink
-            to="/contact"
+            to={routesPath.contact}
             className="block text-md text-gray-100 active:font-bold "
           >
             <div className="flex items-center">
@@ -79,8 +80,9 @@ function Sidebar(props: {
         <hr className="border-gray-700"></hr>
         <li className="hover:bg-gray-700 p-1 rounded-sm">
           <NavLink
-            to="/contact"
+            to={routesPath.login}
             className="block text-md text-gray-100 active:font-bold "
+            onClick={()=>localStorage.removeItem(localStorageKeys.userLogin)}
           >
             <div className="flex items-center">
               <LogOutIcon className="h-5 w-5 inline mr-2" />{' '}

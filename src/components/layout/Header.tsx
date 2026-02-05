@@ -1,16 +1,13 @@
-import { NavLink, useNavigate } from 'react-router';
+import { NavLink } from 'react-router';
 import logo from '../../../public/vite.svg';
 import { LogOutIcon, Menu } from 'lucide-react';
+import { localStorageKeys, routesPath } from '../../utils/constants';
 
 function Header(props: {
   menuStatus: boolean;
   setMenuStatus: (status: boolean) => void;
 }) {
-  const navigate = useNavigate();
-  const logOut = () => {
-    localStorage.removeItem('userLogin');
-    navigate('/');
-  };
+
   return (
     <header className="p-4 bg-gray-800 text-white">
       <nav className="flex gap-4 items-center">
@@ -23,7 +20,7 @@ function Header(props: {
         </div>
         <div className="hidden lg:flex gap-3">
           <NavLink
-            to="/product"
+            to={routesPath.product}
             className={({ isActive }) =>
               `block text-md hover:text-stone-400 ${
                 isActive ? 'font-bold text-white' : 'text-gray-100'
@@ -33,7 +30,7 @@ function Header(props: {
             Product
           </NavLink>
           <NavLink
-            to="/feature"
+            to={routesPath.feature}
             className={({ isActive }) =>
               `block text-md hover:text-stone-400 ${
                 isActive ? 'font-bold text-white' : 'text-gray-100'
@@ -43,7 +40,7 @@ function Header(props: {
             Feature
           </NavLink>
           <NavLink
-            to="/about"
+            to={routesPath.about}
             className={({ isActive }) =>
               `block text-md hover:text-stone-400 ${
                 isActive ? 'font-bold text-white' : 'text-gray-100'
@@ -53,7 +50,7 @@ function Header(props: {
             About
           </NavLink>
           <NavLink
-            to="/contact"
+            to={routesPath.contact}
             className={({ isActive }) =>
               `block text-md hover:text-stone-400 ${
                 isActive ? 'font-bold text-white' : 'text-gray-100'
@@ -72,10 +69,10 @@ function Header(props: {
           ) : null}
         </div>
         <div className="hidden lg:flex flex-1 justify-end items-end">
-          <NavLink to="/" className="flex items-center hover:text-stone-400">
+          <NavLink to={routesPath.home} className="flex items-center hover:text-stone-400">
             <LogOutIcon
               className="h-5 w-5 inline mr-1 hover:text-inherit"
-              onClick={logOut}
+              onClick={()=>localStorage.removeItem(localStorageKeys.userLogin)}
             />
           </NavLink>
         </div>
