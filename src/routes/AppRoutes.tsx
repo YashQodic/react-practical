@@ -10,6 +10,7 @@ import Feature from '../features/feature/pages/Feature';
 import About from '../features/about/pages/About';
 import Contact from '../features/contact/pages/Contact';
 import AuthRoutes from './AuthRoutes';
+import ProductDetail from '../features/product/pages/ProductDetail';
 
 export default function AppRoutes() {
   return (
@@ -26,6 +27,7 @@ export default function AppRoutes() {
       <Route element={<ProtectRoutes />}>
         <Route element={<Layout />}>
           <Route path={routesPath.product} element={<Product />} />
+          <Route path={routesPath.productDetail} element={<ProductDetail/>}/>
           <Route path={routesPath.feature} element={<Feature />}></Route>
           <Route path={routesPath.about} element={<About />}></Route>
           <Route path={routesPath.contact} element={<Contact />}></Route>
