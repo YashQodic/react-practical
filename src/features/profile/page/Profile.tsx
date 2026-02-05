@@ -46,6 +46,8 @@ function Profile({setOpen}: {setOpen: (open: boolean) => void}) {
                 id="email"
                 placeholder="Email"
                 {...register('email')}
+                value="demo@gmail.com"
+                disabled
               />
               {errors.email && (
                 <span className="text-red-400 text-sm">

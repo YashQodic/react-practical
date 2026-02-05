@@ -1,9 +1,10 @@
 import { Outlet, Navigate } from "react-router";
-import { localStorageKeys, routesPath } from "../utils/constants";
+import { routesPath } from "../utils/constants";
+import { useAuthStore } from "../store/authStore";
 
 function ProtectRoutes() {
-  const userLogin = localStorage.getItem(localStorageKeys.userLogin);
-  return userLogin ? <Outlet /> : <Navigate to={routesPath.home} replace />;
+  const { isAuthenticated } = useAuthStore();
+  return isAuthenticated ? <Outlet /> : <Navigate to={routesPath.home} replace />;
 }
 
 export default ProtectRoutes;

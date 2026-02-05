@@ -5,7 +5,7 @@ import ForgotPassword from '../features/auth/pages/ForgotPassword';
 import Layout from '../components/layout/Layout';
 import Product from '../features/product/pages/Product';
 import ProtectRoutes from './ProtectRoutes';
-import { localStorageKeys, routesPath } from '../utils/constants';
+import { routesPath } from '../utils/constants';
 import Feature from '../features/feature/pages/Feature';
 import About from '../features/about/pages/About';
 import Contact from '../features/contact/pages/Contact';
